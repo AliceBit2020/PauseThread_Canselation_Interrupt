@@ -42,6 +42,7 @@ namespace PauseThread
                     catch(OperationCanceledException)
                     {
                         IsPouse = !IsPouse;
+                        cancellationTokenSource.Dispose();
                         cancellationTokenSource = new CancellationTokenSource();
                         cancellationToken = cancellationTokenSource.Token;
                         
@@ -49,7 +50,7 @@ namespace PauseThread
                     try 
                     {
                         if (IsPouse)
-                            Thread.Sleep(Timeout.Infinite);
+                            Thread.Sleep(Timeout.Infinite);///Thread.Sleep(-1);
 
                     }
                     catch (ThreadInterruptedException)
@@ -62,6 +63,7 @@ namespace PauseThread
 
             });
             th.Start();
+
         }
 
         private void button2_Click(object sender, EventArgs e)
